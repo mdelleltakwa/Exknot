@@ -170,14 +170,21 @@
                 </div>
 
                 <div style="border-top:1px solid rgba(255,255,255,0.07);margin-top:18px;padding-top:16px;">
-                    <div style="display:flex;align-items:center;gap:8px;">
-                        <div style="width:32px;height:32px;border-radius:8px;background:rgba(0,200,150,0.1);border:1px solid rgba(0,200,150,0.15);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:var(--teal);font-family:'JetBrains Mono',monospace;flex-shrink:0;">
-                            {{ strtoupper(substr($product->user->name, 0, 2)) }}
+                    <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+                        <div style="display:flex;align-items:center;gap:8px;">
+                            <div style="width:32px;height:32px;border-radius:8px;background:rgba(0,200,150,0.1);border:1px solid rgba(0,200,150,0.15);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:var(--teal);font-family:'JetBrains Mono',monospace;flex-shrink:0;">
+                                {{ strtoupper(substr($product->user->name, 0, 2)) }}
+                            </div>
+                            <div>
+                                <div style="font-size:13px;font-weight:500;color:var(--text-1);">{{ $product->user->company_name ?? $product->user->name }}</div>
+                                <div style="font-size:11px;color:var(--text-3);">{{ $product->user->country ?? 'Expert Firm' }}</div>
+                            </div>
                         </div>
-                        <div>
-                            <div style="font-size:13px;font-weight:500;color:var(--text-1);">{{ $product->user->company_name ?? $product->user->name }}</div>
-                            <div style="font-size:11px;color:var(--text-3);">{{ $product->user->country ?? 'Expert Firm' }}</div>
-                        </div>
+                        @auth
+                            @if(auth()->id() !== $product->user_id)
+                                <a href="{{ route('chat.start', $product->user) }}" class="btn-ghost" style="padding:6px 12px;font-size:11px;">Message</a>
+                            @endif
+                        @endauth
                     </div>
                 </div>
             </div>

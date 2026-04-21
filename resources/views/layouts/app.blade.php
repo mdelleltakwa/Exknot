@@ -251,6 +251,15 @@
         {{-- Right side --}}
         <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
             @auth
+            {{-- Chat --}}
+                @php $msgCount = auth()->user()->unreadMessagesCount(); @endphp
+                <a href="{{ route('chat.index') }}" id="nav-chat-btn" style="position:relative;display:flex;align-items:center;padding:7px;border-radius:8px;color:var(--text-2);transition:all 200ms ease;" onmouseover="this.style.background='rgba(255,255,255,0.05)';this.style.color='var(--text-1)'" onmouseout="this.style.background='transparent';this.style.color='var(--text-2)'">
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+                    @if($msgCount > 0)
+                    <span style="position:absolute;top:-2px;right:-2px;background:var(--teal);color:#0A0D12;font-size:9px;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:600;">{{ $msgCount }}</span>
+                    @endif
+                </a>
+
                 {{-- Cart --}}
                 @php $cartCount = count(session('cart', [])); @endphp
                 <a href="{{ route('cart.index') }}" style="position:relative;display:flex;align-items:center;padding:7px;border-radius:8px;color:var(--text-2);transition:all 200ms ease;" onmouseover="this.style.background='rgba(255,255,255,0.05)';this.style.color='var(--text-1)'" onmouseout="this.style.background='transparent';this.style.color='var(--text-2)'">

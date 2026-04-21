@@ -30,4 +30,23 @@ class User extends Authenticatable implements MustVerifyEmail
     public function products() { return $this->hasMany(Product::class); }
     public function orders()   { return $this->hasMany(Order::class); }
     public function reviews()  { return $this->hasMany(Review::class); }
+
+    public function conversations()
+    {
+        return Conversation::where('client_id', $this->id)
+            ->orWhere('firm_id', $this->id);
+    }
+
+    public function unreadMessagesCount(): int
+    {
+        try {
+            return \App\Models\Message::whereHas('conversation', function ($q) {
+                $q->where('client_id', $this->id)->orWhere('firm_id', $this->id);
+            })->where('sender_id', '!=', $this->id)
+              ->where('is_read', false)
+              ->count();
+        } catch (\Exception $e) {
+            return 0; // In case the migration hasn't been run yet
+        }
+    }
 }
