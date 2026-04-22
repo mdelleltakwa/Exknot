@@ -13,12 +13,12 @@
             --bg-base:     #0A0D12;
             --bg-surface:  #0F1318;
             --bg-elevated: #161B23;
-            --border:      rgba(255,255,255,0.07);
+            --border:      rgba(255,255,255,0.06);
             --teal:        #00C896;
             --teal-dim:    rgba(0,200,150,0.08);
             --teal-glow:   rgba(0,200,150,0.15);
             --amber:       #F5A623;
-            --red:         #FF4D4F;
+            --red:         #FF4560;
             --text-1:      #F0F4F8;
             --text-2:      #8892A0;
             --text-3:      #4A5568;
@@ -54,40 +54,51 @@
         .glass:hover {
             border-color: rgba(0,200,150,0.2);
             transform: translateY(-2px);
-            transition: border-color 200ms ease, transform 200ms ease;
+            transition: border-color 200ms ease, transform 200ms ease, box-shadow 200ms ease;
+            box-shadow: 0 8px 32px rgba(0,200,150,0.08), inset 0 1px 0 rgba(255,255,255,0.1);
         }
         .card-dark {
             background: var(--bg-surface);
             border: 1px solid var(--border);
-            border-radius: 16px;
-            box-shadow: 0 1px 0 rgba(255,255,255,0.04) inset;
-            transition: border-color 200ms ease, transform 200ms ease;
+            border-radius: 12px;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
+            transition: border-color 200ms ease, transform 200ms ease, box-shadow 200ms ease;
         }
-        .card-dark:hover { border-color: rgba(0,200,150,0.15); }
+        .card-dark:hover { border-color: rgba(0,200,150,0.2); box-shadow: 0 8px 32px rgba(0,200,150,0.08), inset 0 1px 0 rgba(255,255,255,0.1); }
 
         /* ── BUTTONS ── */
         .btn-primary {
             display: inline-flex; align-items: center; justify-content: center;
-            background: linear-gradient(135deg, #00C896, #00A878);
-            color: #fff; padding: 11px 24px; border-radius: 10px;
+            background: linear-gradient(180deg, #00D4A0 0%, #00B884 100%);
+            color: #0A0D12; padding: 12px 24px; border-radius: 10px;
             font-weight: 500; font-size: 14px; border: none; cursor: pointer;
             transition: all 150ms cubic-bezier(0.16,1,0.3,1);
             text-decoration: none; white-space: nowrap;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.2), 0 4px 12px rgba(0,200,150,0.25);
         }
-        .btn-primary:hover { filter: brightness(1.1); transform: translateY(-1px); box-shadow: 0 4px 20px rgba(0,200,150,0.3); }
+        .btn-primary:hover { filter: brightness(1.08); transform: translateY(-1px); box-shadow: inset 0 1px 0 rgba(255,255,255,0.2), 0 6px 20px rgba(0,200,150,0.35); }
         .btn-primary:active { transform: scale(0.98); }
         .btn-primary.pulse { animation: btn-pulse 2.5s ease-in-out infinite; }
-        @keyframes btn-pulse { 0%,100%{box-shadow:0 0 0 0 rgba(0,200,150,0.4)} 50%{box-shadow:0 0 0 8px rgba(0,200,150,0)} }
+        @keyframes btn-pulse { 0%,100%{box-shadow:inset 0 1px 0 rgba(255,255,255,0.2),0 0 0 0 rgba(0,200,150,0.4)} 50%{box-shadow:inset 0 1px 0 rgba(255,255,255,0.2),0 0 0 8px rgba(0,200,150,0)} }
 
         .btn-ghost {
             display: inline-flex; align-items: center; justify-content: center;
             border: 1px solid rgba(255,255,255,0.1); color: var(--text-2);
-            padding: 11px 24px; border-radius: 10px; font-size: 14px;
-            background: transparent; cursor: pointer;
+            padding: 12px 24px; border-radius: 10px; font-size: 14px;
+            background: rgba(255,255,255,0.04); cursor: pointer;
             transition: all 150ms cubic-bezier(0.16,1,0.3,1); text-decoration: none; white-space: nowrap;
         }
-        .btn-ghost:hover { border-color: rgba(255,255,255,0.22); color: var(--text-1); transform: translateY(-1px); box-shadow: 0 4px 20px rgba(0,200,150,0.1); }
+        .btn-ghost:hover { border-color: rgba(255,255,255,0.18); color: var(--text-1); transform: translateY(-1px); background: rgba(255,255,255,0.07); }
         .btn-ghost:active { transform: scale(0.98); }
+
+        .btn-text {
+            display: inline-flex; align-items: center;
+            color: #00C896; background: none; border: none;
+            padding: 0; cursor: pointer; font-size: 14px;
+            text-decoration: none; font-family: 'DM Sans', sans-serif;
+            border-bottom: 1px solid transparent; transition: border-bottom-color 200ms ease;
+        }
+        .btn-text:hover { border-bottom-color: #00C896; }
 
         .btn-danger {
             display: inline-flex; align-items: center; justify-content: center;
@@ -159,7 +170,7 @@
         .metric-card {
             background: var(--bg-surface);
             border: 1px solid var(--border);
-            border-radius: 14px; padding: 22px 24px;
+            border-radius: 8px; padding: 22px 24px;
             transition: border-color 200ms ease, transform 200ms ease;
         }
         .metric-card:hover { border-color: rgba(0,200,150,0.2); transform: translateY(-1px); }
@@ -201,6 +212,20 @@
         .footer-link { color: var(--text-2); text-decoration: none; font-size: 13px; padding: 5px 8px; border-radius: 6px; transition: color 200ms ease; }
         .footer-link:hover { color: var(--text-1); }
 
+        /* ── NAV SCROLLED ── */
+        #topNav.scrolled { border-bottom-color: rgba(255,255,255,0.06) !important; }
+
+        /* ── NAV ACTIVE DOT ── */
+        .nav-pill.active::after {
+            content: '';
+            display: block;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: #00C896;
+            margin: 2px auto 0;
+        }
+
         /* ── PAGE LAYOUT ── */
         .page-header { padding: 36px 44px 0; }
         .page-body    { padding: 28px 44px 48px; }
@@ -216,7 +241,7 @@
 <body>
 
 {{-- ═══════════════════════ TOP NAV ═══════════════════════ --}}
-<nav style="border-bottom:1px solid rgba(255,255,255,0.06);background:rgba(10,13,18,0.85);position:sticky;top:0;z-index:50;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);">
+<nav id="topNav" style="border-bottom:1px solid transparent;background:rgba(10,13,18,0.85);position:sticky;top:0;z-index:50;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);transition:border-color 200ms ease;">
     <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 32px;max-width:1400px;margin:0 auto;">
 
         {{-- Logo --}}
@@ -227,12 +252,15 @@
                 <circle cx="30" cy="30" r="5" fill="#00C896"/>
             </svg>
             <span style="font-size:16px;font-weight:300;letter-spacing:0.1em;color:var(--text-1);">Exknot</span>
-            <span class="pulse-dot" style="margin-left:2px;"></span>
+            <span style="font-size:10px;font-style:italic;color:var(--text-3);letter-spacing:0.04em;margin-left:2px;">est. 2026</span>
+            <span class="pulse-dot" style="margin-left:6px;"></span>
         </a>
 
         {{-- Center nav --}}
-        <div style="display:flex;align-items:center;gap:2px;">
+        <div style="display:flex;align-items:center;gap:8px;">
+            @auth
             <a href="{{ route('services.index') }}" class="nav-pill {{ request()->routeIs('services.*') ? 'active' : '' }}">Services</a>
+            @endauth
             @auth
                 @if(auth()->user()->isAdmin())
                     <a href="{{ route('admin.dashboard') }}" class="nav-pill {{ request()->routeIs('admin.*') ? 'active' : '' }}">Admin</a>
@@ -354,9 +382,9 @@
             <span style="font-size:12px;color:var(--text-3);">© 2026 Exknot — Tie the right knot.</span>
         </div>
         <div style="display:flex;gap:4px;">
-            <a href="#" class="footer-link">Privacy</a>
-            <a href="#" class="footer-link">Terms</a>
-            <a href="#" class="footer-link">Contact</a>
+            <a href="{{ route('pages.privacy') }}" class="footer-link">Privacy</a>
+            <a href="{{ route('pages.terms') }}" class="footer-link">Terms</a>
+            <a href="{{ route('pages.contact') }}" class="footer-link">Contact</a>
         </div>
     </div>
 </footer>
@@ -376,12 +404,14 @@ document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 // ── Animated counter ──
 function animateCounter(el) {
     const target = parseInt(el.dataset.target);
+    const prefix = el.dataset.prefix || '';
+    const suffix = el.dataset.suffix || '';
     const duration = 1500;
     const start = performance.now();
     const update = (time) => {
         const progress = Math.min((time - start) / duration, 1);
         const ease = 1 - Math.pow(1 - progress, 3);
-        el.textContent = Math.floor(ease * target).toLocaleString();
+        el.textContent = prefix + Math.floor(ease * target).toLocaleString() + suffix;
         if (progress < 1) requestAnimationFrame(update);
     };
     requestAnimationFrame(update);
@@ -391,6 +421,14 @@ document.querySelectorAll('[data-counter]').forEach(el => {
         if (entry.isIntersecting) animateCounter(el);
     }).observe(el);
 });
+
+// ── Nav scroll border ──
+const topNav = document.getElementById('topNav');
+if (topNav) {
+    window.addEventListener('scroll', () => {
+        topNav.classList.toggle('scrolled', window.scrollY > 20);
+    }, { passive: true });
+}
 </script>
 </body>
 </html>

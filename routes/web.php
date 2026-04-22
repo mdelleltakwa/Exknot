@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
@@ -13,6 +14,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', fn() => view('welcome'))->name('home');
 Route::get('/services', [ProductController::class, 'index'])->name('services.index');
 Route::get('/services/{product}', [ProductController::class, 'show'])->name('services.show');
+
+// Static pages
+Route::get('/privacy', fn() => view('pages.privacy'))->name('pages.privacy');
+Route::get('/terms', fn() => view('pages.terms'))->name('pages.terms');
+Route::get('/contact', fn() => view('pages.contact'))->name('pages.contact');
+Route::post('/contact/send', [ContactController::class, 'send'])->name('contact.send');
 
 // Auth routes (Breeze)
 require __DIR__.'/auth.php';
