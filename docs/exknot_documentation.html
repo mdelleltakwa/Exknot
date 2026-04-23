@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Exknot — Documentation Technique</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  :root {
+    --bg: #ffffff;
+    --text: #1a1a2e;
+    --accent: #1D9E75;
+    --accent2: #16836a;
+    --muted: #64748b;
+    --border: #e2e8f0;
+    --card: #f8fafc;
+    --dark: #0A0D12;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.7;
+    font-size: 14px;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 50px;
+  }
+
+  /* COVER PAGE */
+  .cover {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 90vh;
+    text-align: center;
+    page-break-after: always;
+  }
+  .cover .logo {
+    font-size: 64px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: -2px;
+    margin-bottom: 8px;
+  }
+  .cover .tagline {
+    font-size: 20px;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 60px;
+  }
+  .cover h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+  .cover .meta {
+    color: var(--muted);
+    font-size: 15px;
+    margin-top: 20px;
+  }
+  .cover .stack {
+    display: flex;
+    gap: 10px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .cover .stack span {
+    background: var(--accent);
+    color: #fff;
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  /* HEADINGS */
+  h1 { font-size: 26px; color: var(--accent); margin: 40px 0 16px; border-bottom: 3px solid var(--accent); padding-bottom: 8px; }
+  h2 { font-size: 20px; color: var(--text); margin: 30px 0 12px; }
+  h3 { font-size: 16px; color: var(--accent2); margin: 20px 0 8px; }
+
+  p { margin-bottom: 12px; }
+
+  /* TABLES */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0 24px;
+    font-size: 13px;
+  }
+  th {
+    background: var(--accent);
+    color: #fff;
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 600;
+  }
+  td { padding: 9px 14px; border-bottom: 1px solid var(--border); }
+  tr:nth-child(even) { background: var(--card); }
+
+  /* CODE */
+  code {
+    font-family: 'JetBrains Mono', monospace;
+    background: #f1f5f9;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 12px;
+  }
+  pre {
+    background: var(--dark);
+    color: #e8edf2;
+    padding: 18px 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    line-height: 1.6;
+    margin: 14px 0 20px;
+  }
+
+  /* MERMAID */
+  .mermaid {
+    margin: 20px 0;
+    text-align: center;
+  }
+
+  /* LISTS */
+  ul, ol { margin: 8px 0 16px 24px; }
+  li { margin-bottom: 4px; }
+
+  /* INFO BOX */
+  .info-box {
+    background: linear-gradient(135deg, #f0fdf4, #ecfdf5);
+    border-left: 4px solid var(--accent);
+    padding: 14px 18px;
+    border-radius: 0 8px 8px 0;
+    margin: 16px 0;
+  }
+
+  /* PAGE BREAKS */
+  .page-break { page-break-before: always; }
+
+  /* PRINT */
+  @media print {
+    body { padding: 20px 30px; font-size: 12px; }
+    .cover { min-height: 95vh; }
+    h1 { font-size: 22px; }
+    h2 { font-size: 17px; }
+    pre { font-size: 10px; }
+    table { font-size: 11px; }
+    .mermaid svg { max-width: 100% !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ==================== COVER ==================== -->
+<div class="cover">
+  <div class="logo">Exknot</div>
+  <div class="tagline">Tie the right knot.</div>
+  <h1>Documentation Technique</h1>
+  <p style="color:#64748b;">Description · UML · Base de données · Architecture</p>
+  <div class="meta">
+    <strong>Technologie :</strong> Laravel 11 · Blade · Tailwind CSS · MySQL<br>
+    <strong>Date :</strong> Avril 2026
+  </div>
+  <div class="stack">
+    <span>PHP 8.2+</span>
+    <span>Laravel 11</span>
+    <span>Blade</span>
+    <span>Tailwind CSS</span>
+    <span>MySQL</span>
+    <span>Alpine.js</span>
+    <span>Vite</span>
+  </div>
+</div>
+
+<!-- ==================== TABLE DES MATIÈRES ==================== -->
+<h1>Table des Matières</h1>
+<ol style="font-size:15px; line-height:2.2;">
+  <li><a href="#desc" style="color:var(--accent);text-decoration:none;">Description du Projet</a></li>
+  <li><a href="#uml" style="color:var(--accent);text-decoration:none;">Diagramme UML — Classes</a></li>
+  <li><a href="#db" style="color:var(--accent);text-decoration:none;">Schéma de Base de Données</a></li>
+  <li><a href="#archi" style="color:var(--accent);text-decoration:none;">Explication de l'Architecture</a></li>
+</ol>
+
+<!-- ==================== 1. DESCRIPTION ==================== -->
+<div class="page-break"></div>
+<h1 id="desc">1. Description du Projet</h1>
+
+<p><strong>Exknot</strong> est une plateforme marketplace B2B développée avec <strong>Laravel 11</strong>, permettant à des <strong>cabinets d'expertise</strong> (firms) de publier leurs services professionnels et à des <strong>clients entreprises</strong> de les consulter, les commander et les évaluer.</p>
+
+<div class="info-box">
+  <strong>Concept :</strong> Le nom "Exknot" (Expert + Knot) symbolise le lien noué entre les entreprises clientes et les cabinets d'expertise. Le slogan <em>"Tie the right knot"</em> incarne la mission de connecter la bonne expertise au bon besoin.
+</div>
+
+<h2>Fonctionnalités Principales</h2>
+<table>
+  <tr><th>Module</th><th>Description</th></tr>
+  <tr><td><strong>Authentification</strong></td><td>Inscription, connexion, vérification email, réinitialisation mot de passe (Laravel Breeze)</td></tr>
+  <tr><td><strong>Gestion des profils</strong></td><td>Nom, email, entreprise, pays, bio, avatar</td></tr>
+  <tr><td><strong>Catalogue de services</strong></td><td>Recherche, filtrage par catégorie, tri par prix/date, pagination</td></tr>
+  <tr><td><strong>Panier</strong></td><td>Ajout, modification quantité, suppression (stocké en session)</td></tr>
+  <tr><td><strong>Commandes</strong></td><td>Passage de commande, historique, statuts (pending → validated / cancelled)</td></tr>
+  <tr><td><strong>Avis &amp; Notes</strong></td><td>Système de notation 1-5 étoiles + commentaire par service</td></tr>
+  <tr><td><strong>Messagerie</strong></td><td>Chat en temps réel entre clients et firms (polling AJAX)</td></tr>
+  <tr><td><strong>Administration</strong></td><td>Gestion des utilisateurs, changement de rôles, suppression de comptes</td></tr>
+</table>
+
+<h2>Rôles Utilisateur</h2>
+<table>
+  <tr><th>Rôle</th><th>Permissions</th></tr>
+  <tr><td><strong>Client</strong></td><td>Consulter services, commander, laisser des avis, messagerie</td></tr>
+  <tr><td><strong>Firm</strong></td><td>Publier/modifier/supprimer des services, gérer les commandes reçues, messagerie</td></tr>
+  <tr><td><strong>Admin</strong></td><td>Accès total : gestion utilisateurs, changement de rôles, tableaux de bord globaux</td></tr>
+</table>
+
+<h2>Sécurité</h2>
+<table>
+  <tr><th>Mécanisme</th><th>Implémentation</th></tr>
+  <tr><td><strong>CSRF</strong></td><td>Protection automatique Laravel sur tous les formulaires</td></tr>
+  <tr><td><strong>XSS</strong></td><td>Échappement automatique Blade avec <code>{{ }}</code></td></tr>
+  <tr><td><strong>SQL Injection</strong></td><td>Requêtes paramétrées via Eloquent ORM</td></tr>
+  <tr><td><strong>Autorisation</strong></td><td>Middleware <code>role:...</code> + vérifications dans les controllers</td></tr>
+  <tr><td><strong>Validation</strong></td><td><code>$request->validate()</code> sur toutes les entrées</td></tr>
+  <tr><td><strong>Upload</strong></td><td>Validation MIME type + taille max (2MB)</td></tr>
+</table>
+
+<!-- ==================== 2. UML ==================== -->
+<div class="page-break"></div>
+<h1 id="uml">2. Diagramme UML — Diagramme de Classes</h1>
+
+<div class="mermaid">
+classDiagram
+    class User {
+        +int id
+        +string name
+        +string email
+        +enum role
+        +string company_name
+        +string country
+        +text bio
+        +string avatar
+        +isAdmin() bool
+        +isFirm() bool
+        +isClient() bool
+        +products() HasMany
+        +orders() HasMany
+        +reviews() HasMany
+        +conversations() Query
+        +unreadMessagesCount() int
+    }
+
+    class Category {
+        +int id
+        +string name
+        +string slug
+        +text description
+        +products() HasMany
+    }
+
+    class Product {
+        +int id
+        +int user_id FK
+        +int category_id FK
+        +string title
+        +text description
+        +decimal price
+        +string image
+        +enum status
+        +user() BelongsTo
+        +category() BelongsTo
+        +reviews() HasMany
+        +orderItems() HasMany
+        +averageRating() float
+    }
+
+    class Order {
+        +int id
+        +int user_id FK
+        +decimal total
+        +enum status
+        +text notes
+        +user() BelongsTo
+        +items() HasMany
+    }
+
+    class OrderItem {
+        +int id
+        +int order_id FK
+        +int product_id FK
+        +int quantity
+        +decimal price
+        +product() BelongsTo
+        +order() BelongsTo
+    }
+
+    class Review {
+        +int id
+        +int user_id FK
+        +int product_id FK
+        +tinyint rating
+        +text comment
+        +user() BelongsTo
+        +product() BelongsTo
+    }
+
+    class Conversation {
+        +int id
+        +int client_id FK
+        +int firm_id FK
+        +client() BelongsTo
+        +firm() BelongsTo
+        +messages() HasMany
+        +latestMessage() HasOne
+        +otherParty(User) User
+        +unreadCountFor(int) int
+        +findOrStart(int int) static
+    }
+
+    class Message {
+        +int id
+        +int conversation_id FK
+        +int sender_id FK
+        +text body
+        +bool is_read
+        +conversation() BelongsTo
+        +sender() BelongsTo
+    }
+
+    User "1" --> "*" Product : publishes
+    User "1" --> "*" Order : places
+    User "1" --> "*" Review : writes
+    Category "1" --> "*" Product : contains
+    Product "1" --> "*" Review : has
+    Product "1" --> "*" OrderItem : included in
+    Order "1" --> "*" OrderItem : contains
+    User "1" --> "*" Conversation : client
+    User "1" --> "*" Conversation : firm
+    Conversation "1" --> "*" Message : has
+    User "1" --> "*" Message : sends
+</div>
+
+<!-- ==================== 3. BDD ==================== -->
+<div class="page-break"></div>
+<h1 id="db">3. Schéma de Base de Données</h1>
+
+<div class="mermaid">
+erDiagram
+    users {
+        bigint id PK
+        varchar name
+        varchar email UK
+        timestamp email_verified_at
+        varchar password
+        enum role "client-firm-admin"
+        varchar company_name
+        varchar country
+        text bio
+        varchar avatar
+    }
+
+    categories {
+        bigint id PK
+        varchar name
+        varchar slug UK
+        text description
+    }
+
+    products {
+        bigint id PK
+        bigint user_id FK
+        bigint category_id FK
+        varchar title
+        text description
+        decimal price
+        varchar image
+        enum status "active-inactive"
+    }
+
+    orders {
+        bigint id PK
+        bigint user_id FK
+        decimal total
+        enum status "pending-validated-cancelled"
+        text notes
+    }
+
+    order_items {
+        bigint id PK
+        bigint order_id FK
+        bigint product_id FK
+        int quantity
+        decimal price
+    }
+
+    reviews {
+        bigint id PK
+        bigint user_id FK
+        bigint product_id FK
+        tinyint rating
+        text comment
+    }
+
+    conversations {
+        bigint id PK
+        bigint client_id FK
+        bigint firm_id FK
+    }
+
+    messages {
+        bigint id PK
+        bigint conversation_id FK
+        bigint sender_id FK
+        text body
+        boolean is_read
+    }
+
+    users ||--o{ products : "publishes"
+    users ||--o{ orders : "places"
+    users ||--o{ reviews : "writes"
+    categories ||--o{ products : "contains"
+    products ||--o{ order_items : "included in"
+    products ||--o{ reviews : "rated by"
+    orders ||--o{ order_items : "contains"
+    users ||--o{ conversations : "client_id"
+    users ||--o{ conversations : "firm_id"
+    conversations ||--o{ messages : "contains"
+    users ||--o{ messages : "sender_id"
+</div>
+
+<h2>Résumé des Tables</h2>
+<table>
+  <tr><th>Table</th><th>Colonnes Clés</th><th>Relations</th></tr>
+  <tr><td><code>users</code></td><td>name, email, role, company_name, country, bio, avatar</td><td>→ products, orders, reviews, conversations, messages</td></tr>
+  <tr><td><code>categories</code></td><td>name, slug, description</td><td>→ products</td></tr>
+  <tr><td><code>products</code></td><td>title, description, price, image, status</td><td>→ user, category, reviews, order_items</td></tr>
+  <tr><td><code>orders</code></td><td>total, status, notes</td><td>→ user, order_items</td></tr>
+  <tr><td><code>order_items</code></td><td>quantity, price</td><td>→ order, product</td></tr>
+  <tr><td><code>reviews</code></td><td>rating (1-5), comment</td><td>→ user, product</td></tr>
+  <tr><td><code>conversations</code></td><td>client_id, firm_id (unique pair)</td><td>→ client, firm, messages</td></tr>
+  <tr><td><code>messages</code></td><td>body, is_read</td><td>→ conversation, sender</td></tr>
+</table>
+
+<h3>Contraintes</h3>
+<ul>
+  <li><code>users.email</code> → UNIQUE</li>
+  <li><code>categories.slug</code> → UNIQUE</li>
+  <li><code>conversations(client_id, firm_id)</code> → UNIQUE composite</li>
+  <li><code>messages(conversation_id, created_at)</code> → INDEX composite</li>
+  <li>Toutes les clés étrangères → <code>ON DELETE CASCADE</code></li>
+</ul>
+
+<!-- ==================== 4. ARCHITECTURE ==================== -->
+<div class="page-break"></div>
+<h1 id="archi">4. Explication de l'Architecture</h1>
+
+<h2>Architecture MVC</h2>
+<p>L'application suit le pattern <strong>Model-View-Controller</strong> de Laravel :</p>
+
+<div class="mermaid">
+flowchart LR
+    A["🌐 Navigateur"] --> B["Routes web.php"]
+    B --> C["Middleware auth+role"]
+    C --> D["Controllers"]
+    D --> E["Models Eloquent"]
+    E --> F["🗄️ MySQL"]
+    D --> G["Views Blade"]
+    G --> A
+</div>
+
+<h2>Organisation des Routes</h2>
+<table>
+  <tr><th>Groupe</th><th>Préfixe</th><th>Middleware</th><th>Routes</th></tr>
+  <tr><td><strong>Public</strong></td><td>/</td><td>—</td><td>/, /services, /contact, /privacy, /terms</td></tr>
+  <tr><td><strong>Authentifié</strong></td><td>/</td><td>auth, verified</td><td>/profile, /cart, /orders, /chat, /dashboard</td></tr>
+  <tr><td><strong>Firm</strong></td><td>/firm</td><td>role:firm,admin</td><td>/firm/dashboard, /firm/services/*, /firm/orders/*</td></tr>
+  <tr><td><strong>Admin</strong></td><td>/admin</td><td>role:admin</td><td>/admin/dashboard, /admin/users/*</td></tr>
+</table>
+
+<h2>Controllers</h2>
+<table>
+  <tr><th>Controller</th><th>Responsabilité</th><th>Actions</th></tr>
+  <tr><td><code>ProductController</code></td><td>CRUD services</td><td>index, show, create, store, edit, update, destroy</td></tr>
+  <tr><td><code>CartController</code></td><td>Panier session</td><td>index, add, update, remove</td></tr>
+  <tr><td><code>OrderController</code></td><td>Commandes</td><td>index, show, store, cancel, updateStatus</td></tr>
+  <tr><td><code>ReviewController</code></td><td>Avis</td><td>store, destroy</td></tr>
+  <tr><td><code>DashboardController</code></td><td>3 tableaux de bord</td><td>client(), firm(), admin()</td></tr>
+  <tr><td><code>ChatController</code></td><td>Messagerie</td><td>index, show, store, poll, start</td></tr>
+  <tr><td><code>ProfileController</code></td><td>Profil utilisateur</td><td>edit, update, destroy</td></tr>
+  <tr><td><code>ContactController</code></td><td>Contact</td><td>send</td></tr>
+</table>
+
+<h2>Structure des Fichiers</h2>
+<pre>
+app/
+├── Http/
+│   ├── Controllers/
+│   │   ├── ProductController.php    # CRUD services
+│   │   ├── CartController.php       # Panier session
+│   │   ├── OrderController.php      # Workflow commandes
+│   │   ├── ReviewController.php     # Notes et commentaires
+│   │   ├── ChatController.php       # Messagerie temps réel
+│   │   ├── DashboardController.php  # 3 dashboards par rôle
+│   │   ├── ProfileController.php    # Gestion profil
+│   │   └── ContactController.php    # Formulaire contact
+│   └── Middleware/
+│       └── RoleMiddleware.php       # Contrôle d'accès par rôle
+├── Models/
+│   ├── User.php          # roles: client / firm / admin
+│   ├── Product.php       # Services publiés par les firms
+│   ├── Category.php      # Catégories de services
+│   ├── Order.php         # status: pending / validated / cancelled
+│   ├── OrderItem.php     # Ligne de commande
+│   ├── Review.php        # Note 1-5 + commentaire
+│   ├── Conversation.php  # Chat client ↔ firm
+│   └── Message.php       # Messages avec suivi de lecture
+
+database/
+├── migrations/           # 8 tables (+ sessions, cache, jobs)
+└── seeders/
+    └── DatabaseSeeder.php
+
+resources/views/
+├── layouts/app.blade.php   # Layout principal Exknot
+├── welcome.blade.php       # Landing page
+├── dashboard/              # client / firm / admin
+├── services/               # catalogue, show, create, edit
+├── cart/                   # index panier
+├── orders/                 # historique commandes
+├── chat/                   # messagerie
+├── profile/                # édition profil
+└── pages/                  # privacy, terms, contact
+
+routes/web.php              # Routes groupées par rôle
+</pre>
+
+<h2>Flux de Commande</h2>
+<div class="mermaid">
+sequenceDiagram
+    actor Client
+    participant Catalogue
+    participant Panier as Panier Session
+    participant Order as OrderController
+    participant DB as MySQL
+
+    Client->>Catalogue: Parcourir les services
+    Client->>Panier: Ajouter au panier
+    Client->>Panier: Modifier quantités
+    Client->>Order: Passer commande
+    Order->>DB: Créer Order + OrderItems
+    Order->>Panier: Vider le panier
+    Order-->>Client: Confirmation
+</div>
+
+<h2>Flux de Messagerie</h2>
+<div class="mermaid">
+sequenceDiagram
+    actor Client
+    actor Firm
+    participant Chat as ChatController
+    participant DB as MySQL
+
+    Client->>Chat: Cliquer Contacter sur un service
+    Chat->>DB: findOrStart client_id et firm_id
+    Chat-->>Client: Afficher conversation
+    Client->>Chat: Envoyer message
+    Chat->>DB: Créer Message is_read=false
+
+    loop Polling toutes les 3s
+        Firm->>Chat: GET /chat/id/poll
+        Chat->>DB: Nouveaux messages
+        Chat->>DB: Marquer comme lus
+        Chat-->>Firm: JSON nouveaux messages
+    end
+</div>
+
+<h2>Identité Visuelle</h2>
+<table>
+  <tr><th>Élément</th><th>Valeur</th></tr>
+  <tr><td><strong>Nom</strong></td><td>Exknot</td></tr>
+  <tr><td><strong>Slogan</strong></td><td><em>Tie the right knot.</em></td></tr>
+  <tr><td><strong>Fond</strong></td><td><span style="background:#0A0D12;color:#fff;padding:2px 10px;border-radius:4px;">#0A0D12</span></td></tr>
+  <tr><td><strong>Accent</strong></td><td><span style="background:#1D9E75;color:#fff;padding:2px 10px;border-radius:4px;">#1D9E75</span></td></tr>
+  <tr><td><strong>Texte</strong></td><td><span style="background:#E8EDF2;color:#333;padding:2px 10px;border-radius:4px;">#E8EDF2</span></td></tr>
+  <tr><td><strong>Police</strong></td><td>DM Sans (Google Fonts)</td></tr>
+</table>
+
+<script>mermaid.initialize({startOnLoad:true, theme:'default'});</script>
+</body>
+</html>
