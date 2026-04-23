@@ -56,7 +56,6 @@
             @foreach([
                     ['100', '%', '100+', 'Trusted firms'],
                     ['48', 'h', '48h', 'Avg. proposal time'],
-                    ['100%', '%', '100%', 'Focus on quality'],
                     ['0', '', '0', 'Hidden fees'],
                 ] as [$target, $suffix, $display, $lbl])
                 <div style="flex:1;text-align:center;padding:32px 24px;">
