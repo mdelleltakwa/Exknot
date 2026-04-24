@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Exknot - Rapport Technique</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Inter',sans-serif; color:#1e293b; background:#fff; line-height:1.7; padding:40px 60px; max-width:1100px; margin:auto; }
+  @media print { body { padding:20px 40px; } .page-break { page-break-before:always; } }
+  h1 { font-size:2.4em; color:#6366f1; border-bottom:4px solid #6366f1; padding-bottom:12px; margin-bottom:8px; }
+  h2 { font-size:1.6em; color:#4f46e5; margin-top:40px; margin-bottom:16px; border-left:5px solid #6366f1; padding-left:14px; }
+  h3 { font-size:1.2em; color:#334155; margin-top:24px; margin-bottom:10px; }
+  p, li { font-size:0.95em; margin-bottom:8px; }
+  ul { padding-left:24px; }
+  table { width:100%; border-collapse:collapse; margin:16px 0; font-size:0.9em; }
+  th { background:#6366f1; color:#fff; padding:10px 12px; text-align:left; }
+  td { padding:8px 12px; border-bottom:1px solid #e2e8f0; }
+  tr:nth-child(even) { background:#f8fafc; }
+  .cover { text-align:center; padding:100px 0 60px; }
+  .cover h1 { font-size:3em; border:none; }
+  .cover .subtitle { font-size:1.3em; color:#64748b; margin-top:12px; }
+  .cover .meta { margin-top:40px; color:#94a3b8; font-size:0.95em; }
+  .badge { display:inline-block; background:#e0e7ff; color:#4338ca; padding:2px 10px; border-radius:12px; font-size:0.8em; font-weight:600; }
+  .mermaid { margin:20px 0; text-align:center; }
+  .tech-stack { display:flex; flex-wrap:wrap; gap:10px; margin:12px 0; }
+  .tech-stack span { background:#f1f5f9; border:1px solid #cbd5e1; padding:6px 14px; border-radius:8px; font-size:0.85em; font-weight:600; }
+  .section-box { background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px; padding:20px; margin:16px 0; }
+  code { background:#f1f5f9; padding:2px 6px; border-radius:4px; font-size:0.88em; }
+</style>
+</head>
+<body>
+
+<!-- PAGE DE GARDE -->
+<div class="cover">
+  <h1>EXKNOT</h1>
+  <div class="subtitle">Rapport Technique du Projet</div>
+  <p style="font-size:1.1em;color:#6366f1;margin-top:8px;">Marketplace B2B de Services Professionnels</p>
+  <div class="meta">
+    <p><strong>Framework :</strong> Laravel 12 &bull; PHP 8.2</p>
+    <p><strong>Date :</strong> Avril 2026</p>
+    <p><strong>Version :</strong> 1.0</p>
+  </div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- TABLE DES MATIÈRES -->
+<h2>Table des matières</h2>
+<ol style="font-size:1em;line-height:2.2;">
+  <li>Description du projet</li>
+  <li>Stack technologique</li>
+  <li>Architecture de l'application (MVC)</li>
+  <li>Diagramme UML — Classes</li>
+  <li>Diagramme UML — Cas d'utilisation</li>
+  <li>Diagramme de séquence</li>
+  <li>Schéma de base de données</li>
+  <li>Structure des fichiers</li>
+  <li>Système de rôles et sécurité</li>
+  <li>Routes et API</li>
+</ol>
+
+<div class="page-break"></div>
+
+<!-- 1. DESCRIPTION DU PROJET -->
+<h2>1. Description du projet</h2>
+<p><strong>Exknot</strong> est une plateforme web de type <em>marketplace B2B</em> permettant de mettre en relation des <strong>entreprises (Firms)</strong> proposant des services professionnels et des <strong>clients</strong> cherchant à acheter ces services.</p>
+
+<h3>Fonctionnalités principales</h3>
+<ul>
+  <li><strong>Catalogue de services</strong> — Consultation publique avec recherche, filtrage par catégorie et tri par prix</li>
+  <li><strong>Gestion des services</strong> — Les entreprises peuvent créer, modifier et supprimer leurs services (CRUD complet avec upload d'images)</li>
+  <li><strong>Panier d'achat</strong> — Ajout, modification de quantité et suppression d'articles (stocké en session)</li>
+  <li><strong>Système de commandes</strong> — Passage de commande, suivi de statut (pending → validated / cancelled)</li>
+  <li><strong>Avis et évaluations</strong> — Notation de 1 à 5 étoiles avec commentaires sur les services</li>
+  <li><strong>Messagerie en temps réel</strong> — Chat entre clients et entreprises avec polling AJAX</li>
+  <li><strong>Tableaux de bord</strong> — 3 dashboards distincts : Client, Firm, Admin</li>
+  <li><strong>Authentification complète</strong> — Inscription, connexion, vérification email, réinitialisation de mot de passe (Laravel Breeze)</li>
+  <li><strong>Gestion de profil</strong> — Modification des informations, avatar, bio, pays, nom d'entreprise</li>
+  <li><strong>Pages statiques</strong> — Contact, Politique de confidentialité, Conditions d'utilisation</li>
+  <li><strong>Administration</strong> — Gestion des utilisateurs (changement de rôle, suppression), statistiques globales</li>
+</ul>
+
+<h3>Rôles utilisateur</h3>
+<table>
+  <tr><th>Rôle</th><th>Description</th><th>Permissions</th></tr>
+  <tr><td><span class="badge">client</span></td><td>Acheteur de services</td><td>Consulter, acheter, évaluer, chatter, gérer son profil</td></tr>
+  <tr><td><span class="badge">firm</span></td><td>Entreprise/prestataire</td><td>Publier des services, gérer les commandes, chatter, dashboard firm</td></tr>
+  <tr><td><span class="badge">admin</span></td><td>Administrateur</td><td>Accès total : gestion utilisateurs, statistiques, toutes les opérations</td></tr>
+</table>
+
+<div class="page-break"></div>
+
+<!-- 2. STACK TECHNOLOGIQUE -->
+<h2>2. Stack technologique</h2>
+<div class="tech-stack">
+  <span>PHP 8.2</span><span>Laravel 12</span><span>Laravel Breeze</span><span>Blade Templates</span>
+  <span>Tailwind CSS</span><span>Vite</span><span>SQLite</span><span>Eloquent ORM</span>
+</div>
+
+<div class="section-box">
+  <h3>Dépendances clés</h3>
+  <table>
+    <tr><th>Package</th><th>Version</th><th>Usage</th></tr>
+    <tr><td>laravel/framework</td><td>^12.0</td><td>Framework principal</td></tr>
+    <tr><td>laravel/breeze</td><td>^2.4</td><td>Authentification (scaffolding)</td></tr>
+    <tr><td>laravel/tinker</td><td>^2.10</td><td>Console interactive</td></tr>
+    <tr><td>Vite + Tailwind CSS</td><td>—</td><td>Frontend build &amp; styles</td></tr>
+  </table>
+</div>
+
+<div class="page-break"></div>
+
+<!-- 3. ARCHITECTURE -->
+<h2>3. Architecture de l'application (MVC)</h2>
+<p>Exknot suit le pattern <strong>MVC (Model–View–Controller)</strong> natif de Laravel :</p>
+
+<div class="mermaid">
+graph TB
+  subgraph "Navigateur Client"
+    A["Requête HTTP"]
+  end
+  subgraph "Laravel Application"
+    B["Routes<br/>(web.php / auth.php)"]
+    C["Middleware<br/>(auth, verified, role)"]
+    D["Controllers"]
+    E["Models<br/>(Eloquent ORM)"]
+    F["Views<br/>(Blade Templates)"]
+    G["Policies"]
+  end
+  subgraph "Stockage"
+    H["SQLite DB"]
+    I["Storage<br/>(images)"]
+  end
+  A --> B --> C --> D
+  D --> E --> H
+  D --> F
+  D --> G
+  D --> I
+  F -->|"HTML Response"| A
+</div>
+
+<h3>Couches de l'architecture</h3>
+<table>
+  <tr><th>Couche</th><th>Responsabilité</th><th>Fichiers</th></tr>
+  <tr><td><strong>Routes</strong></td><td>Mappage URL → Controller</td><td><code>routes/web.php</code>, <code>routes/auth.php</code></td></tr>
+  <tr><td><strong>Middleware</strong></td><td>Filtrage des requêtes (auth, rôle)</td><td><code>RoleMiddleware.php</code></td></tr>
+  <tr><td><strong>Controllers</strong></td><td>Logique métier et orchestration</td><td>9 controllers dans <code>app/Http/Controllers/</code></td></tr>
+  <tr><td><strong>Models</strong></td><td>Entités et relations Eloquent</td><td>8 models dans <code>app/Models/</code></td></tr>
+  <tr><td><strong>Views</strong></td><td>Rendu HTML avec Blade</td><td>Templates dans <code>resources/views/</code></td></tr>
+  <tr><td><strong>Policies</strong></td><td>Autorisation fine (ownership)</td><td>3 policies dans <code>app/Policies/</code></td></tr>
+</table>
+
+<div class="page-break"></div>
+
+<!-- 4. DIAGRAMME UML CLASSES -->
+<h2>4. Diagramme UML — Classes</h2>
+
+<div class="mermaid">
+classDiagram
+  class User {
+    +int id
+    +string name
+    +string email
+    +string password
+    +enum role [client,firm,admin]
+    +string company_name
+    +string country
+    +text bio
+    +string avatar
+    +isAdmin() bool
+    +isFirm() bool
+    +isClient() bool
+    +unreadMessagesCount() int
+  }
+  class Category {
+    +int id
+    +string name
+    +string slug
+    +text description
+  }
+  class Product {
+    +int id
+    +int user_id
+    +int category_id
+    +string title
+    +text description
+    +decimal price
+    +string image
+    +enum status [active,inactive]
+    +averageRating() float
+  }
+  class Order {
+    +int id
+    +int user_id
+    +decimal total
+    +enum status [pending,validated,cancelled]
+    +text notes
+  }
+  class OrderItem {
+    +int id
+    +int order_id
+    +int product_id
+    +int quantity
+    +decimal price
+  }
+  class Review {
+    +int id
+    +int user_id
+    +int product_id
+    +tinyInt rating
+    +text comment
+  }
+  class Conversation {
+    +int id
+    +int client_id
+    +int firm_id
+    +findOrStart() Conversation
+    +otherParty() User
+    +unreadCountFor() int
+  }
+  class Message {
+    +int id
+    +int conversation_id
+    +int sender_id
+    +text body
+    +bool is_read
+  }
+
+  User "1" --> "*" Product : publie
+  User "1" --> "*" Order : passe
+  User "1" --> "*" Review : écrit
+  Category "1" --> "*" Product : contient
+  Product "1" --> "*" Review : reçoit
+  Product "1" --> "*" OrderItem : inclus dans
+  Order "1" --> "*" OrderItem : contient
+  User "1" --> "*" Conversation : client_id
+  User "1" --> "*" Conversation : firm_id
+  Conversation "1" --> "*" Message : contient
+  User "1" --> "*" Message : envoie
+</div>
+
+<div class="page-break"></div>
+
+<!-- 5. DIAGRAMME CAS D'UTILISATION -->
+<h2>5. Diagramme UML — Cas d'utilisation</h2>
+
+<div class="mermaid">
+graph LR
+  subgraph Acteurs
+    V((Visiteur))
+    CL((Client))
+    FI((Firm))
+    AD((Admin))
+  end
+
+  subgraph "Cas d'utilisation"
+    UC1["Consulter le catalogue"]
+    UC2["Voir détail service"]
+    UC3["S'inscrire / Se connecter"]
+    UC4["Ajouter au panier"]
+    UC5["Passer commande"]
+    UC6["Évaluer un service"]
+    UC7["Chatter avec une firm"]
+    UC8["Gérer son profil"]
+    UC9["Publier un service"]
+    UC10["Gérer ses services"]
+    UC11["Gérer les commandes reçues"]
+    UC12["Dashboard Firm"]
+    UC13["Dashboard Admin"]
+    UC14["Gérer les utilisateurs"]
+    UC15["Voir les statistiques"]
+  end
+
+  V --- UC1
+  V --- UC2
+  V --- UC3
+  CL --- UC1
+  CL --- UC4
+  CL --- UC5
+  CL --- UC6
+  CL --- UC7
+  CL --- UC8
+  FI --- UC9
+  FI --- UC10
+  FI --- UC11
+  FI --- UC12
+  FI --- UC7
+  AD --- UC13
+  AD --- UC14
+  AD --- UC15
+</div>
+
+<div class="page-break"></div>
+
+<!-- 6. DIAGRAMME DE SEQUENCE -->
+<h2>6. Diagramme de séquence — Processus de commande</h2>
+
+<div class="mermaid">
+sequenceDiagram
+  actor C as Client
+  participant V as View (Blade)
+  participant R as Router
+  participant CC as CartController
+  participant OC as OrderController
+  participant DB as SQLite DB
+
+  C->>V: Consulte un service
+  C->>R: POST /cart/{product}
+  R->>CC: add(product)
+  CC->>CC: Mise à jour session
+  CC-->>C: Redirect avec succès
+
+  C->>R: GET /cart
+  R->>CC: index()
+  CC-->>V: Affiche panier
+
+  C->>R: POST /orders
+  R->>OC: store()
+  OC->>DB: Créer Order
+  OC->>DB: Créer OrderItems
+  OC->>OC: Vider session cart
+  OC-->>C: Redirect vers commande
+</div>
+
+<div class="page-break"></div>
+
+<!-- 7. SCHEMA BASE DE DONNÉES -->
+<h2>7. Schéma de base de données</h2>
+<p>Base de données : <strong>SQLite</strong> — Fichier : <code>database/database.sqlite</code></p>
+
+<div class="mermaid">
+erDiagram
+  users {
+    int id PK
+    string name
+    string email UK
+    timestamp email_verified_at
+    string password
+    enum role
+    string company_name
+    string country
+    text bio
+    string avatar
+    string remember_token
+    timestamps created_at
+  }
+
+  categories {
+    int id PK
+    string name
+    string slug UK
+    text description
+    timestamps created_at
+  }
+
+  products {
+    int id PK
+    int user_id FK
+    int category_id FK
+    string title
+    text description
+    decimal price
+    string image
+    enum status
+    timestamps created_at
+  }
+
+  orders {
+    int id PK
+    int user_id FK
+    decimal total
+    enum status
+    text notes
+    timestamps created_at
+  }
+
+  order_items {
+    int id PK
+    int order_id FK
+    int product_id FK
+    int quantity
+    decimal price
+    timestamps created_at
+  }
+
+  reviews {
+    int id PK
+    int user_id FK
+    int product_id FK
+    tinyint rating
+    text comment
+    timestamps created_at
+  }
+
+  conversations {
+    int id PK
+    int client_id FK
+    int firm_id FK
+    timestamps created_at
+  }
+
+  messages {
+    int id PK
+    int conversation_id FK
+    int sender_id FK
+    text body
+    bool is_read
+    timestamps created_at
+  }
+
+  sessions {
+    string id PK
+    int user_id FK
+    string ip_address
+    text user_agent
+    longtext payload
+    int last_activity
+  }
+
+  password_reset_tokens {
+    string email PK
+    string token
+    timestamp created_at
+  }
+
+  users ||--o{ products : "publie"
+  users ||--o{ orders : "passe"
+  users ||--o{ reviews : "ecrit"
+  categories ||--o{ products : "contient"
+  products ||--o{ order_items : "inclus"
+  products ||--o{ reviews : "recoit"
+  orders ||--o{ order_items : "contient"
+  users ||--o{ conversations : "client_id"
+  users ||--o{ conversations : "firm_id"
+  conversations ||--o{ messages : "contient"
+  users ||--o{ messages : "sender_id"
+</div>
+
+<h3>Détail des tables</h3>
+<table>
+  <tr><th>Table</th><th>Colonnes clés</th><th>Relations</th></tr>
+  <tr><td><strong>users</strong></td><td>id, name, email, role (enum), company_name, avatar</td><td>→ products, orders, reviews, conversations, messages</td></tr>
+  <tr><td><strong>categories</strong></td><td>id, name, slug (unique)</td><td>→ products</td></tr>
+  <tr><td><strong>products</strong></td><td>id, user_id (FK), category_id (FK), title, price, status</td><td>→ reviews, order_items</td></tr>
+  <tr><td><strong>orders</strong></td><td>id, user_id (FK), total, status (enum)</td><td>→ order_items</td></tr>
+  <tr><td><strong>order_items</strong></td><td>id, order_id (FK), product_id (FK), quantity, price</td><td>—</td></tr>
+  <tr><td><strong>reviews</strong></td><td>id, user_id (FK), product_id (FK), rating, comment</td><td>—</td></tr>
+  <tr><td><strong>conversations</strong></td><td>id, client_id (FK→users), firm_id (FK→users)</td><td>→ messages</td></tr>
+  <tr><td><strong>messages</strong></td><td>id, conversation_id (FK), sender_id (FK→users), body, is_read</td><td>—</td></tr>
+</table>
+
+<div class="page-break"></div>
+
+<!-- 8. STRUCTURE DES FICHIERS -->
+<h2>8. Structure des fichiers</h2>
+<div class="section-box" style="font-family:monospace;font-size:0.85em;line-height:1.9;">
+Exknot-branch/<br>
+├── app/<br>
+│&nbsp;&nbsp; ├── Http/<br>
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── Controllers/<br>
+│&nbsp;&nbsp; │&nbsp;&nbsp; │&nbsp;&nbsp; ├── Auth/ (Breeze controllers)<br>
+│&nbsp;&nbsp; │&nbsp;&nbsp; │&nbsp;&nbsp; ├── CartController.php<br>
+│&nbsp;&nbsp; │&nbsp;&nbsp; │&nbsp;&nbsp; ├── ChatController.php<br>
+│&nbsp;&nbsp; │&nbsp;&nbsp; │&nbsp;&nbsp; ├── ContactController.php<br>
+│&nbsp;&nbsp; │&nbsp;&nbsp; │&nbsp;&nbsp; ├── DashboardController.php<br>
+│&nbsp;&nbsp; │&nbsp;&nbsp; │&nbsp;&nbsp; ├── OrderController.php<br>
+│&nbsp;&nbsp; │&nbsp;&nbsp; │&nbsp;&nbsp; ├── ProductController.php<br>
+│&nbsp;&nbsp; │&nbsp;&nbsp; │&nbsp;&nbsp; ├── ProfileController.php<br>
+│&nbsp;&nbsp; │&nbsp;&nbsp; │&nbsp;&nbsp; └── ReviewController.php<br>
+│&nbsp;&nbsp; │&nbsp;&nbsp; └── Middleware/<br>
+│&nbsp;&nbsp; │&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; └── RoleMiddleware.php<br>
+│&nbsp;&nbsp; ├── Models/<br>
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── User.php, Product.php, Category.php<br>
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── Order.php, OrderItem.php, Review.php<br>
+│&nbsp;&nbsp; │&nbsp;&nbsp; └── Conversation.php, Message.php<br>
+│&nbsp;&nbsp; └── Policies/<br>
+│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ├── OrderPolicy.php<br>
+│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ├── ProductPolicy.php<br>
+│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; └── ReviewPolicy.php<br>
+├── database/migrations/ (9 fichiers)<br>
+├── resources/views/<br>
+│&nbsp;&nbsp; ├── welcome.blade.php (page d'accueil)<br>
+│&nbsp;&nbsp; ├── layouts/ (app, guest, navigation)<br>
+│&nbsp;&nbsp; ├── auth/ (login, register, etc.)<br>
+│&nbsp;&nbsp; ├── dashboard/ (client, firm, admin)<br>
+│&nbsp;&nbsp; ├── services/ (index, show, create, edit)<br>
+│&nbsp;&nbsp; ├── cart/ (index)<br>
+│&nbsp;&nbsp; ├── orders/ (index, show)<br>
+│&nbsp;&nbsp; ├── chat/ (index, show)<br>
+│&nbsp;&nbsp; ├── pages/ (contact, privacy, terms)<br>
+│&nbsp;&nbsp; └── profile/ (edit)<br>
+├── routes/<br>
+│&nbsp;&nbsp; ├── web.php (routes principales)<br>
+│&nbsp;&nbsp; └── auth.php (routes authentification)<br>
+└── public/ (assets, storage link)
+</div>
+
+<div class="page-break"></div>
+
+<!-- 9. SÉCURITÉ ET RÔLES -->
+<h2>9. Système de rôles et sécurité</h2>
+
+<h3>Middleware de rôle</h3>
+<p>Le middleware <code>RoleMiddleware</code> vérifie le rôle de l'utilisateur connecté. Il accepte plusieurs rôles en paramètre :</p>
+<div class="section-box">
+  <code>Route::middleware('role:firm,admin') → Accès réservé aux firms et admins</code><br>
+  <code>Route::middleware('role:admin') → Accès réservé aux admins uniquement</code>
+</div>
+
+<h3>Couches de sécurité</h3>
+<table>
+  <tr><th>Mécanisme</th><th>Description</th></tr>
+  <tr><td>Middleware <code>auth</code></td><td>Vérifie que l'utilisateur est connecté</td></tr>
+  <tr><td>Middleware <code>verified</code></td><td>Vérifie que l'email est confirmé</td></tr>
+  <tr><td>Middleware <code>role</code></td><td>Contrôle d'accès basé sur le rôle (client/firm/admin)</td></tr>
+  <tr><td>Policies</td><td>Vérification de propriété (ownership) sur Product, Order, Review</td></tr>
+  <tr><td>Validation</td><td>Validation serveur de toutes les entrées (FormRequest + validate())</td></tr>
+  <tr><td>CSRF</td><td>Protection CSRF automatique de Laravel sur tous les formulaires</td></tr>
+  <tr><td>Hashing</td><td>Mots de passe hashés via Bcrypt (12 rounds)</td></tr>
+  <tr><td>MustVerifyEmail</td><td>Le modèle User implémente la vérification d'email</td></tr>
+</table>
+
+<div class="page-break"></div>
+
+<!-- 10. ROUTES -->
+<h2>10. Routes et API</h2>
+
+<h3>Routes publiques</h3>
+<table>
+  <tr><th>Méthode</th><th>URI</th><th>Action</th></tr>
+  <tr><td>GET</td><td>/</td><td>Page d'accueil</td></tr>
+  <tr><td>GET</td><td>/services</td><td>Catalogue des services</td></tr>
+  <tr><td>GET</td><td>/services/{product}</td><td>Détail d'un service</td></tr>
+  <tr><td>GET</td><td>/contact</td><td>Page de contact</td></tr>
+  <tr><td>POST</td><td>/contact/send</td><td>Envoi formulaire contact</td></tr>
+</table>
+
+<h3>Routes authentifiées (Client)</h3>
+<table>
+  <tr><th>Méthode</th><th>URI</th><th>Action</th></tr>
+  <tr><td>GET</td><td>/dashboard</td><td>Dashboard client</td></tr>
+  <tr><td>GET/POST</td><td>/cart, /cart/{product}</td><td>Panier (voir, ajouter)</td></tr>
+  <tr><td>PATCH/DELETE</td><td>/cart/{id}</td><td>Modifier/supprimer du panier</td></tr>
+  <tr><td>POST/GET</td><td>/orders</td><td>Créer/lister commandes</td></tr>
+  <tr><td>GET</td><td>/orders/{order}</td><td>Détail commande</td></tr>
+  <tr><td>POST</td><td>/services/{product}/reviews</td><td>Ajouter un avis</td></tr>
+  <tr><td>GET/POST</td><td>/chat, /chat/{conv}</td><td>Messagerie</td></tr>
+</table>
+
+<h3>Routes Firm</h3>
+<table>
+  <tr><th>Méthode</th><th>URI</th><th>Action</th></tr>
+  <tr><td>GET</td><td>/firm/dashboard</td><td>Dashboard entreprise</td></tr>
+  <tr><td>GET/POST</td><td>/firm/services/create, /firm/services</td><td>Créer un service</td></tr>
+  <tr><td>GET/PATCH</td><td>/firm/services/{product}/edit</td><td>Modifier un service</td></tr>
+  <tr><td>DELETE</td><td>/firm/services/{product}</td><td>Supprimer un service</td></tr>
+  <tr><td>PATCH</td><td>/firm/orders/{order}/status</td><td>Mettre à jour statut commande</td></tr>
+</table>
+
+<h3>Routes Admin</h3>
+<table>
+  <tr><th>Méthode</th><th>URI</th><th>Action</th></tr>
+  <tr><td>GET</td><td>/admin/dashboard</td><td>Dashboard administration</td></tr>
+  <tr><td>PATCH</td><td>/admin/users/{user}/role</td><td>Changer rôle utilisateur</td></tr>
+  <tr><td>DELETE</td><td>/admin/users/{user}</td><td>Supprimer utilisateur</td></tr>
+</table>
+
+<br><br>
+<hr>
+<p style="text-align:center;color:#94a3b8;margin-top:20px;font-size:0.9em;">
+  <strong>Exknot</strong> — Rapport Technique &bull; Laravel 12 / PHP 8.2 &bull; Avril 2026
+</p>
+
+<script>mermaid.initialize({startOnLoad:true, theme:'default'});</script>
+</body>
+</html>
