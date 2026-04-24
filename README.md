@@ -1,63 +1,71 @@
-# Exknot — Verified Expertise Marketplace
-### B2B Platform · Laravel 11 · Blade · Tailwind CSS · Alpine.js
+# Exknot
+
+**Verified Expertise Marketplace** — B2B platform connecting clients with audited expert firms.
+
+Stack: Laravel 11 · Blade · Tailwind CSS · Alpine.js
 
 ---
 
-## Quick Setup (5 minutes)
+## Setup
 
 ```bash
-# 1. Create Laravel project
 composer create-project laravel/laravel exknot
 cd exknot
 
-# 2. Install Breeze (auth scaffolding)
 composer require laravel/breeze --dev
 php artisan breeze:install blade
 npm install && npm run dev
+```
 
-# 3. Copy all project files into the Laravel structure
-# (replace app/, database/, resources/views/, routes/web.php)
+Copy project files into the Laravel structure (replace `app/`, `database/`, `resources/views/`, `routes/web.php`), then configure `.env`:
 
-# 4. Configure .env
+```env
 DB_CONNECTION=mysql
 DB_DATABASE=exknot
 DB_USERNAME=root
 DB_PASSWORD=
 
-MAIL_MAILER=log  # for local email verification testing
+MAIL_MAILER=log
+```
 
-# 5. Run migrations + seeders
+Run migrations and seed demo data:
+
+```bash
 php artisan migrate:fresh --seed
-
-# 6. Create storage link (for image uploads)
 php artisan storage:link
+```
 
-# 7. Register RoleMiddleware in bootstrap/app.php
-# Add inside withMiddleware():
-# $middleware->alias(['role' => \App\Http\Middleware\RoleMiddleware::class]);
+**Manual registration steps** (one-time):
 
-# 8. Register Policies in AppServiceProvider
-# Add in boot():
-# Gate::policy(Product::class, ProductPolicy::class);
-# Gate::policy(Order::class, OrderPolicy::class);
-# Gate::policy(Review::class, ReviewPolicy::class);
+In `bootstrap/app.php`, inside `withMiddleware()`:
+```php
+$middleware->alias(['role' => \App\Http\Middleware\RoleMiddleware::class]);
+```
 
-# 9. Start the server
+In `AppServiceProvider::boot()`:
+```php
+Gate::policy(Product::class, ProductPolicy::class);
+Gate::policy(Order::class, OrderPolicy::class);
+Gate::policy(Review::class, ReviewPolicy::class);
+```
+
+Start the server:
+```bash
 php artisan serve
 ```
 
 ---
 
-## Test Accounts (after seeding)
+## Demo Accounts
 
 | Role | Email | Password |
 |------|-------|----------|
 | Admin | admin@exknot.com | password |
-| Firm 1 | contact@alvarez-mercer.com | password |
-| Firm 2 | info@nexora-audit.com | password |
-| Firm 3 | ops@techprobe.ae | password |
-| Client 1 | sophie@globalcorp.fr | password |
-| Client 2 | omar@gulf-energy.com | password |
+| Firm | contact@alvarez-mercer.com | password |
+| Firm | info@nexora-audit.com | password |
+| Firm | ops@techprobe.ae | password |
+| Client | sophie@globalcorp.fr | password |
+| Client | omar@gulf-energy.com | password |
 
 ---
 
@@ -67,20 +75,20 @@ php artisan serve
 app/
 ├── Http/
 │   ├── Controllers/
-│   │   ├── ProductController.php   # CRUD services
-│   │   ├── CartController.php      # Session cart
-│   │   ├── OrderController.php     # Orders workflow
-│   │   ├── ReviewController.php    # Ratings & comments
-│   │   └── DashboardController.php # 3 role dashboards
+│   │   ├── ProductController.php    # Service CRUD
+│   │   ├── CartController.php       # Session-based cart
+│   │   ├── OrderController.php      # Order lifecycle
+│   │   ├── ReviewController.php     # Ratings + comments
+│   │   └── DashboardController.php  # Role-specific dashboards
 │   └── Middleware/
-│       └── RoleMiddleware.php      # Role-based access
+│       └── RoleMiddleware.php
 ├── Models/
-│   ├── User.php        # roles: client / firm / admin
-│   ├── Product.php     # services published by firms
+│   ├── User.php        # Roles: client / firm / admin
+│   ├── Product.php     # Services listed by firms
 │   ├── Category.php
-│   ├── Order.php       # status: pending/validated/cancelled
+│   ├── Order.php       # Statuses: pending / validated / cancelled
 │   ├── OrderItem.php
-│   └── Review.php      # rating 1-5 + comment
+│   └── Review.php      # Rating (1–5) + comment
 └── Policies/
     ├── ProductPolicy.php
     ├── OrderPolicy.php
@@ -89,47 +97,51 @@ app/
 database/
 ├── migrations/         # 6 tables
 └── seeders/
-    └── DatabaseSeeder.php  # realistic Exknot demo data
+    └── DatabaseSeeder.php
 
 resources/views/
-├── layouts/app.blade.php   # main layout with Exknot brand
-├── welcome.blade.php        # homepage
-├── services/               # catalogue, show, create, edit
-├── cart/                   # cart index
-├── orders/                 # orders list
-└── dashboard/              # client / firm / admin
+├── layouts/app.blade.php
+├── welcome.blade.php
+├── services/           # Catalogue, detail, create, edit
+├── cart/
+├── orders/
+└── dashboard/          # Client / firm / admin views
 
-routes/web.php              # grouped by role
+routes/web.php          # Grouped by role
 ```
 
 ---
 
-## Features Checklist
+## Features
 
-### Mandatory ✅
-- [x] Auth: register, login, logout, email verification, password reset
-- [x] Profile management
-- [x] Services CRUD (firm) with image upload
-- [x] Public catalogue with search, filter by category, sort by price/date
-- [x] Cart: add, update quantity, remove
-- [x] Orders: place, history, statuses (pending/validated/cancelled)
-- [x] Reviews: rate + comment a service
-- [x] MVC architecture, Eloquent ORM, Migrations, Seeders, Blade
-- [x] CSRF protection (automatic Laravel)
-- [x] XSS protection (Blade {{ }} auto-escapes)
-- [x] SQL injection protection (Eloquent parameterized queries)
+**Core**
+- Auth: register, login, logout, email verification, password reset
+- Profile management
+- Services CRUD with image upload (firm accounts)
+- Public catalogue: search, category filter, sort by price/date
+- Cart: add, update quantity, remove
+- Orders: placement, history, status tracking
+- Reviews: per-service rating and comment
 
-### Bonus Level 3 — +3 points ✅
-- [x] Multi-role management: Client / Expert Firm / Admin
-- [x] Admin panel: manage users, change roles, delete accounts
-- [x] Pagination on catalogue and user list
-- [x] Image upload with storage
+**Multi-role (Bonus)**
+- Three distinct roles: Client, Expert Firm, Admin
+- Admin panel: user management, role changes, account deletion
+- Pagination across catalogue and user lists
+
+**Security**
+- CSRF protection (Laravel default)
+- XSS protection (Blade `{{ }}` auto-escaping)
+- SQL injection protection (Eloquent parameterized queries)
 
 ---
 
 ## Brand
 
-**Name:** Exknot
-**Tagline:** Tie the right knot.
-**Colors:** #0A0D12 (bg) · #1D9E75 (teal accent) · #E8EDF2 (text)
-**Font:** DM Sans (Google Fonts)
+**Exknot** — *Tie the right knot.*
+
+| Token | Value |
+|-------|-------|
+| Background | `#0A0D12` |
+| Accent | `#1D9E75` |
+| Text | `#E8EDF2` |
+| Font | DM Sans (Google Fonts) |
