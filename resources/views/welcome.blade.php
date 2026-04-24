@@ -1,205 +1,253 @@
 @extends('layouts.app')
-@section('title', 'Exknot — Verified Expertise')
+@section('title', 'Exknot — The Private Network for Serious Expertise')
 
 @section('content')
 
-    {{-- ═══════════════════════ HERO ═══════════════════════ --}}
-    <section style="padding:96px 32px 0;max-width:1200px;margin:0 auto;position:relative;">
+    {{-- ═══════════════════════ HERO SECTION ═══════════════════════ --}}
+    <section style="padding:120px 32px 60px;max-width:1300px;margin:0 auto;position:relative;overflow:visible;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;">
+            
+            {{-- Left: The Promise --}}
+            <div style="position:relative;z-index:2;">
 
-        {{-- Ticker badge --}}
-        <div class="reveal"
-            style="display:inline-flex;align-items:center;gap:8px;padding:6px 16px;border-radius:30px;border:1px solid rgba(0,200,150,0.2);background:rgba(0,200,150,0.06);font-size:12px;color:var(--teal);margin-bottom:40px;">
-            <span
-                style="width:5px;height:5px;border-radius:50%;background:var(--teal);display:inline-block;animation:pulse-dot 2s ease-in-out infinite;flex-shrink:0;"></span>
-            ↗ 2,400 firms joined last month
-        </div>
 
-        {{-- Main headline --}}
-        <h1 class="reveal"
-            style="font-size:clamp(40px,5.5vw,64px);font-weight:300;line-height:1.05;letter-spacing:-0.04em;max-width:720px;margin-bottom:24px;">
-            The only marketplace where serious companies find <span style="color:#00C896;">serious</span> experts.
-        </h1>
+                <h1 class="reveal reveal-delay-1 text-balance" style="margin-bottom:28px;">
+                    The private network where serious companies find <span class="gradient-text">verified expertise</span>.
+                </h1>
 
-        <p class="reveal" style="font-size:18px;color:#8892A0;line-height:1.7;max-width:480px;margin-bottom:44px;">
-            Stop spending weeks on LinkedIn. Get proposals from vetted consulting and audit firms in 48 hours.
-        </p>
+                <p class="reveal reveal-delay-2" style="font-size:18px;color:var(--text-2);line-height:1.75;max-width:520px;margin-bottom:48px;">
+                    Bypass the noise of freelance boards and cold outreach. Connect directly with vetted consulting, engineering, and audit firms ready to execute complex B2B engagements.
+                </p>
 
-        {{-- CTAs --}}
-        <div class="reveal" style="display:flex;align-items:center;gap:16px;margin-bottom:32px;flex-wrap:wrap;">
-            <a href="{{ route('services.index') }}"
-                style="display:inline-flex;align-items:center;gap:8px;background:linear-gradient(180deg,#00D4A0 0%,#00B884 100%);color:#0A0D12;padding:12px 24px;border-radius:10px;font-weight:500;font-size:15px;border:none;cursor:pointer;text-decoration:none;box-shadow:inset 0 1px 0 rgba(255,255,255,0.2),0 4px 12px rgba(0,200,150,0.25);transition:all 150ms ease;">
-                Find your expert
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                    stroke-linecap="round">
-                    <circle cx="11" cy="11" r="8" />
-                    <path d="m21 21-4.35-4.35" />
-                </svg>
-            </a>
-            <a href="{{ route('register') }}"
-                style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);color:var(--text-2);padding:12px 24px;border-radius:10px;font-size:15px;text-decoration:none;transition:all 150ms ease;">
-                Are you a firm? Join free →
-            </a>
-        </div>
+                <div class="reveal reveal-delay-3" style="display:flex;align-items:center;gap:16px;margin-bottom:40px;flex-wrap:wrap;">
+                    <a href="{{ route('services.index') }}" class="btn-primary magnetic" style="padding:16px 32px;font-size:15px;">
+                        Submit a Project Brief
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                    <a href="{{ route('register') }}" class="btn-ghost" style="padding:16px 28px;font-size:15px;">
+                        Apply for Firm Verification
+                    </a>
+                </div>
 
-        {{-- Trust indicator --}}
-        <div class="reveal"
-            style="font-size:13px;color:var(--text-3);display:flex;align-items:center;gap:10px;padding-bottom:96px;">
-            <span>Trusted by firms in 47 countries</span>
-            <span style="font-size:16px;letter-spacing:3px;">🇫🇷🇩🇪🇬🇧🇺🇸🇯🇵</span>
+                <div class="reveal reveal-delay-4" style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-3);display:flex;align-items:center;gap:20px;letter-spacing:0.02em;">
+                    <span style="display:flex;align-items:center;gap:6px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> 3-Stage Vetting</span>
+                    <span style="display:flex;align-items:center;gap:6px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Secure Escrow</span>
+                    <span style="display:flex;align-items:center;gap:6px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> 48h SLA</span>
+                </div>
+            </div>
+
+            {{-- Right: Platform Mockup --}}
+            <div class="reveal reveal-delay-2" style="position:relative;perspective:1000px;display:none;@media(min-width:1024px){display:block;}">
+                <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:120%;height:120%;background:radial-gradient(circle,rgba(0,229,160,0.08),transparent 70%);filter:blur(60px);z-index:0;"></div>
+                
+                {{-- Mockup UI Card --}}
+                <div class="tilt-card glass" style="position:relative;z-index:1;padding:24px;border:1px solid rgba(255,255,255,0.08);background:rgba(13,17,23,0.8);box-shadow:0 30px 60px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.1);transform:rotateY(-8deg) rotateX(4deg);">
+                    
+                    {{-- Fake Header --}}
+                    <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);padding-bottom:16px;margin-bottom:20px;">
+                        <div style="display:flex;align-items:center;gap:12px;">
+                            <div style="width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,#1A202C,#2D3748);display:flex;align-items:center;justify-content:center;">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                            </div>
+                            <div>
+                                <div style="font-size:14px;font-weight:500;color:var(--text-1);">Helios Cybernetics GmbH</div>
+                                <div style="font-size:11px;color:var(--teal);font-family:'JetBrains Mono',monospace;">VERIFIED FIRM #A892</div>
+                            </div>
+                        </div>
+                        <span class="badge badge-teal">Matched</span>
+                    </div>
+
+                    {{-- Fake Content --}}
+                    <div style="margin-bottom:24px;">
+                        <div style="font-size:11px;text-transform:uppercase;color:var(--text-3);margin-bottom:8px;letter-spacing:0.06em;">Active Proposal</div>
+                        <div style="font-size:16px;color:var(--text-1);font-weight:500;margin-bottom:6px;">GDPR Compliance Audit & Architecture Review</div>
+                        <p style="font-size:12px;color:var(--text-2);line-height:1.6;">Comprehensive assessment of current data workflows, identifying non-compliant data silos, and providing a remediated architecture blueprint within 4 weeks.</p>
+                    </div>
+
+                    {{-- Fake Escrow Block --}}
+                    <div style="background:rgba(0,0,0,0.3);border:1px solid var(--border);border-radius:8px;padding:16px;display:flex;justify-content:space-between;align-items:center;">
+                        <div>
+                            <div style="font-size:11px;color:var(--text-3);margin-bottom:4px;">Engagement Value</div>
+                            <div style="font-family:'Outfit',sans-serif;font-size:24px;color:var(--text-1);">€24,500</div>
+                        </div>
+                        <div style="text-align:right;">
+                            <div style="font-size:11px;color:var(--text-3);margin-bottom:4px;">Escrow Status</div>
+                            <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--gold);">
+                                <span class="pulse-dot" style="background:var(--gold);"></span> Funds Secured
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
 
-    {{-- ═══════════════════════ STATS ROW ═══════════════════════ --}}
-    <section style="max-width:1200px;margin:0 auto;padding:0 32px 96px;">
-        <div class="reveal"
-            style="display:flex;align-items:center;border-top:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06);">
-            @foreach([
-                    ['100', '%', '100+', 'Trusted firms'],
-                    ['48', 'h', '48h', 'Avg. proposal time'],
-                    ['0', '', '0', 'Hidden fees'],
-                ] as [$target, $suffix, $display, $lbl])
-                <div style="flex:1;text-align:center;padding:32px 24px;">
-                    <div style="font-size:32px;font-weight:300;color:#00C896;letter-spacing:-0.02em;" data-counter data-target="{{ $target }}" data-suffix="{{ $suffix }}">{{ $display }}</div>
-                    <div style="font-size:11px;color:#8892A0;margin-top:6px;text-transform:uppercase;letter-spacing:0.08em;">{{ $lbl }}</div>
-                </div>
-                @if(!$loop->last)
-                    <div style="width:1px;height:56px;background:rgba(255,255,255,0.06);flex-shrink:0;"></div>
-                @endif
-            @endforeach
+    {{-- ═══════════════════════ TRUST STRIP ═══════════════════════ --}}
+    <section style="padding:40px 0 80px;border-bottom:1px solid var(--border);position:relative;">
+        <div style="text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-3);margin-bottom:20px;">Engineered for complex requirements across</div>
+        <div class="reveal" style="display:flex;overflow:hidden;position:relative;width:100%;">
+            <div style="display:flex;animation:marquee 40s linear infinite;width:max-content;opacity:0.8;">
+                @for($i = 0; $i < 3; $i++)
+                @foreach(['Financial Audit','Cybersecurity','Supply Chain Optimization','Legal Advisory','Enterprise IT','Compliance & Regulatory','Cloud Architecture','Mergers & Acquisitions','ESG Strategy'] as $cat)
+                <span style="padding:0 32px;font-family:'Outfit',sans-serif;font-size:18px;color:var(--text-2);white-space:nowrap;display:flex;align-items:center;gap:32px;">
+                    {{ $cat }}
+                    <span style="width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,0.1);"></span>
+                </span>
+                @endforeach
+                @endfor
+            </div>
+            <div style="position:absolute;inset:0;background:linear-gradient(90deg, var(--bg-base) 0%, transparent 15%, transparent 85%, var(--bg-base) 100%);pointer-events:none;"></div>
         </div>
     </section>
 
     {{-- ═══════════════════════ HOW IT WORKS ═══════════════════════ --}}
-    <section style="padding:0 32px 96px;max-width:1200px;margin:0 auto;">
-        <div style="margin-bottom:52px;">
-            <div class="label reveal" style="margin-bottom:12px;">Process</div>
-            <h2 class="reveal" style="font-size:clamp(28px,4vw,40px);max-width:400px;">Three steps. No ambiguity.</h2>
+    <section style="padding:100px 32px;max-width:1300px;margin:0 auto;">
+        <div style="margin-bottom:60px;text-align:center;">
+            <div class="label reveal" style="margin-bottom:14px;justify-content:center;display:flex;">Sourcing Workflow</div>
+            <h2 class="reveal reveal-delay-1" style="max-width:600px;margin:0 auto;">Clarity over complexity.<br><span class="gradient-text">Execute with precision.</span></h2>
         </div>
 
-
-
-
-        {{-- Asymmetric grid: Step 1 (60%) + Step 2 (40% offset) --}}
-        <div style="disp
-    l                   ay:flex;flex-wrap:wrap;gap:16px;margin-bottom:16px;">
-
-
-
-
-
-                                                       {{-- Step 1: large card, 60% --}}
-            <div class="reveal" style="flex:0 0 calc(60% - 8px);min-width:280px;background:var(--bg-surface);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:40px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.08);transition:border-color 200ms ease,box-shadow 200ms ease;" onmouseover="this.style.borderColor='rgba(0,200,150,0.2)';this.style.boxShadow='0 8px 32px rgba(0,200,150,0.08),inset 0 1px 0 rgba(255,255,255,0.1)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.06)';this.style.boxShadow='inset 0 1px 0 rgba(255,255,255,0.08)'">
-                <div style="display:flex;align-items:flex-start;gap:24px;">
-                    <div sty
-    l                       e="width:48px;height:48px;border-radius:12px;background:rgba(0,200,150,0.1);border:1px solid rgba(0,20
-                            0,150,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00C896" stroke-width="1.5"
-                            stroke-linecap="round"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><pat
-    h                        d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-                    </div>
-                    <div>
-                        <div class="label" style="color:var(--text-3);margin-bottom:10px;">01</div>
-                        <div style="font-size:20px;font-weight:400;color:var(--text-1);margin-bottom:12px;letter-spacing:-0.02em;">Post your need</div>
-                        <div style="font-size:14px;color:var(--text-2);line-height:1.75;max-width:340px;">Describe your project scope, sector, budget range, and timeline. Our intake form takes under 3 minutes. No sales calls. No account managers. Just your brief, reviewed by real firms.</div>
-                    </div>
-
-
-
-                           </di
-    v               >
+        <div class="timeline-grid">
+            {{-- Step 1 --}}
+            <div class="reveal glass tilt-card" style="padding:40px;position:relative;overflow:hidden;">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:64px;font-weight:100;color:rgba(255,255,255,0.03);position:absolute;top:20px;right:20px;line-height:1;">01</div>
+                <div style="width:40px;height:40px;border-radius:10px;background:rgba(0,229,160,0.1);border:1px solid rgba(0,229,160,0.2);display:flex;align-items:center;justify-content:center;margin-bottom:24px;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                </div>
+                <h3 style="font-size:18px;color:var(--text-1);margin-bottom:12px;">Define the Scope</h3>
+                <p style="font-size:14px;color:var(--text-2);line-height:1.7;">Submit a structured project brief detailing requirements, budget, and timeline. No sales calls. Just your technical parameters, securely routed to matching firms.</p>
+            </div>
+            
+            {{-- Step 2 --}}
+            <div class="reveal reveal-delay-1 glass tilt-card" style="padding:40px;position:relative;overflow:hidden;">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:64px;font-weight:100;color:rgba(255,255,255,0.03);position:absolute;top:20px;right:20px;line-height:1;">02</div>
+                <div style="width:40px;height:40px;border-radius:10px;background:rgba(212,168,83,0.1);border:1px solid rgba(212,168,83,0.2);display:flex;align-items:center;justify-content:center;margin-bottom:24px;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                </div>
+                <h3 style="font-size:18px;color:var(--text-1);margin-bottom:12px;">Proposals in 48h</h3>
+                <p style="font-size:14px;color:var(--text-2);line-height:1.7;">Receive tailored, actionable proposals within 48 hours. Every response comes from a firm that has already passed our strict legal and financial vetting protocol.</p>
             </div>
 
-
-
-
-
-
-
-            {{-- Step 2: small card, 40%, offset down 24px --}}
-            <div class="reveal" style="flex:0 0 calc(40% - 8px);min-width:240px;background:var(--bg-surface);border:1px sol
-                    id rgba(255,255,255,0.06);border-radius:12px;padding:32px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.08);transition:border-color 200ms ease,box-shadow 200ms ease;margin-top:24px;" onmouseover="this.style.borderColor='rgba(0,200,150,0.2)';this.style.boxShadow='0 8px 32px rgba(0,200,150,0.08),inset 0 1px 0 rgba(255,255,255,0.1)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.06)';this.style.boxShadow='inset 0 1px 0 rgba(255,255,255,0.08)'">
-                <div style="width:44px;height:44px;border-radius:12px;background:rgba(0,200,150,0.1);border:1px solid rgba(0
-                   ,200,150,0.2);display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00C896" stroke-width="1.5" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+            {{-- Step 3 --}}
+            <div class="reveal reveal-delay-2 glass tilt-card" style="padding:40px;position:relative;overflow:hidden;">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:64px;font-weight:100;color:rgba(255,255,255,0.03);position:absolute;top:20px;right:20px;line-height:1;">03</div>
+                <div style="width:40px;height:40px;border-radius:10px;background:rgba(0,229,160,0.1);border:1px solid rgba(0,229,160,0.2);display:flex;align-items:center;justify-content:center;margin-bottom:24px;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
                 </div>
-                <div class="label" style="color:var(--text-3);margin-bottom:10px;">02</div>
-                <div style="font-size:18px;font-weight:400;color:var(--text-1);margin-bottom:10px;letter-spacing:-0.02em;">Proposals in 48h</div>
-                <div style=
-           "font-size:13px;color:var(--text-2);line-height:1.65;">Verified firms matching your brief respond with tailored proposals. Not auto-generated quotes — real responses from real people.</div>
+                <h3 style="font-size:18px;color:var(--text-1);margin-bottom:12px;">Execute Securely</h3>
+                <p style="font-size:14px;color:var(--text-2);line-height:1.7;">Contract digitally and hold funds in escrow directly through Exknot. Funds are only released when mutually agreed milestones are verifiably delivered.</p>
+            </div>
+        </div>
+    </section>
 
-
-                   </div>
+    {{-- ═══════════════════════ USE CASES (BENTO GRID) ═══════════════════════ --}}
+    <section style="padding:100px 32px;max-width:1300px;margin:0 auto;">
+        <div style="margin-bottom:60px;">
+            <div class="label reveal" style="margin-bottom:14px;">B2B Scenarios</div>
+            <h2 class="reveal reveal-delay-1" style="max-width:500px;">Built for the demands of<br><span class="gradient-text">modern enterprise.</span></h2>
         </div>
 
-
-
-
-
-
-                         {{-- Step 3: medium card, 50%, centered --}}
-        <div class="reveal" style="width:50%;margin:0 auto;min-width:280px;background:var(--bg-surface);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:36px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.08);transition:border-color 200ms ease,box-shadow 200ms ease;" onmouseover="this.style.borderColor='rgba(0,200,150,0.2)';this.style.boxShadow='0 8px 32px rgba(0,200,150,0.08),inset 0 1px 0 rgba(255,255,255,0.1)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.06)';this.style.boxShadow='inset 0 1px 0 rgba(255,255,255,0.08)'">
-            <div style="display:flex;align-items:flex-start;gap:20px;">
-                <div sty
-                       le="width:44px;height:44px;border-radius:12px;background:rgba(0,200,150,0.1);border:1px solid rgba(0,20
-                        0,150,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00C896" stroke-width="1.5" s
-                       troke-linecap="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-
-                       2-2V5a2 2 0 012-2h11"/></svg>
-                </div>
+        <div class="bento-grid">
+            
+            {{-- Big Box 1 --}}
+            <div class="bento-item bento-col-7 glass reveal" style="padding:48px;display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(135deg, rgba(13,17,23,0.8), rgba(7,9,13,0.9));">
                 <div>
-                    <div class="label" style="color:var(--text-3);margin-bottom:10px;">03</div>
-                    <div style="font-size:19px;font-weight:400;color:var(--text-1);margin-bottom:10px;letter-spacing:-0.02em;">Contract with confidence</div>
-                    <div style="font-size:13px;color:var(--text-2);line-height:1.65;">Sign digitally, pay via escrow, deliver milestones, leave verified reviews. The entire engagement lifecycle — in one place. No side invoices, no off-platform transfers.</div>
+                    <span class="badge badge-teal" style="margin-bottom:20px;">Compliance & Legal</span>
+                    <h3 style="font-size:24px;color:var(--text-1);margin-bottom:16px;">"We need a GDPR compliance audit before our Series B."</h3>
+                    <p style="font-size:15px;color:var(--text-2);line-height:1.7;max-width:400px;">Source specialized legal and data architecture firms capable of performing deep-dive compliance audits with certified documentation.</p>
                 </div>
             </div>
+
+            {{-- Small Box 1 --}}
+            <div class="bento-item bento-col-5 glass reveal reveal-delay-1" style="padding:40px;">
+                <div style="width:36px;height:36px;border-radius:8px;background:rgba(212,168,83,0.1);display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+                </div>
+                <h3 style="font-size:18px;color:var(--text-1);margin-bottom:12px;">Offshore Engineering</h3>
+                <p style="font-size:14px;color:var(--text-2);line-height:1.6;">Engage vetted agency teams for a 6-month React Native migration without the overhead of internal hiring.</p>
+            </div>
+
+            {{-- Small Box 2 --}}
+            <div class="bento-item bento-col-5 glass reveal reveal-delay-2" style="padding:40px;">
+                <div style="width:36px;height:36px;border-radius:8px;background:rgba(0,229,160,0.1);display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2" stroke-linecap="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                </div>
+                <h3 style="font-size:18px;color:var(--text-1);margin-bottom:12px;">Supply Chain Audit</h3>
+                <p style="font-size:14px;color:var(--text-2);line-height:1.6;">Verify international supplier compliance through independent, locally stationed inspection firms.</p>
+            </div>
+
+            {{-- Big Box 2 --}}
+            <div class="bento-item bento-col-7 glass reveal reveal-delay-3" style="padding:48px;display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(135deg, rgba(13,17,23,0.8), rgba(7,9,13,0.9));">
+                <div>
+                    <span class="badge badge-amber" style="margin-bottom:20px;">Financial Services</span>
+                    <h3 style="font-size:24px;color:var(--text-1);margin-bottom:16px;">"We require M&A technical due diligence in 14 days."</h3>
+                    <p style="font-size:15px;color:var(--text-2);line-height:1.7;max-width:400px;">Deploy expert technical and financial auditors rapidly. Exknot's escrow system securely handles 6-figure consulting engagements.</p>
+                </div>
+            </div>
+
         </div>
     </section>
 
+    {{-- ═══════════════════════ WHY EXKNOT (DIFFERENTIATION) ═══════════════════════ --}}
+    <section style="padding:100px 32px;max-width:1300px;margin:0 auto;">
+        <div style="margin-bottom:60px;text-align:center;">
+            <div class="label reveal" style="margin-bottom:14px;justify-content:center;display:flex;">Differentiation</div>
+            <h2 class="reveal reveal-delay-1" style="max-width:600px;margin:0 auto;">Not a freelance board.<br><span class="gradient-text">A professional network.</span></h2>
+        </div>
 
-
-
-               {{-- ═══════════
-                   ════════════ TRUST / SOCIAL PROOF ═══════════════════════ --}}
-    <section style="padding:0 32px 96px;max-width:1200px;margin:0 auto;">
-
-                           <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;">
-            @foreach([
-                    ['Verified firms only', 'Every firm passes a 3-step check: legal status, financial health, and expertise audit. No freelancers. No unvetted agencies.', '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>'],
-                    ['Escrow-protected', 'Funds are held until both parties confirm delivery. No wire transfers to strangers.', '<rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>'],
-                    ['48h response SLA', 'Firms commit to responding within 48 hours or risk suspension. No proposal requests lost to silence.', '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>'],
-                    ['47 countries', '28 industries. 40+ service verticals. From Paris to Singapore to São Paulo.', '<circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/>'],
-                ] as [$title, $desc, $icon])
-                <div class="reveal" style="padding:24px;background:var(--bg-surface);border:1px solid rgba(255,255,255,0.06);border-radius:12px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.08);transition:border-color 200ms ease,box-shadow 200ms ease;" onmouseover="this.style.borderColor='rgba(0,200,150,0.2)';this.style.boxShadow='0 8px 32px rgba(0,200,150,0.08),inset 0 1px 0 rgba(255,255,255,0.1)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.06)';this.style.boxShadow='inset 0 1px 0 rgba(255,255,255,0.08)'">
-                    <div style="width:36px;height:36px;border-radius:10px;background:rgba(0,200,150,0.08);border:1px solid rgba(0,200,150,0.15);display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
-
-                   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#00C896" stroke-width="1.5" stroke-linecap="round">{!! $icon !!}</svg>
-
-                   </div>
-
-                        <div style="font-size:14px;font-weight:500;color:var(--text-1);margin-bottom:8px;letter-spacing:-0.01em;">{{ $title }}</div>
-                    <div style="font-size:13px;color:var(--text-2);line-height:1.65;">{{ $desc }}</div>
-                </div>
-
-               @endforeach
-
-                    </div>
+        <div class="reveal glass" style="overflow-x:auto;">
+            <table class="data-table" style="min-width:700px;">
+                <thead>
+                    <tr>
+                        <th style="width:30%;">Feature</th>
+                        <th style="width:35%;color:var(--text-1);font-weight:700;font-size:14px;">Exknot</th>
+                        <th style="width:35%;">Traditional Freelance Platforms</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Entity Type</strong></td>
+                        <td style="color:var(--teal);">Registered Firms & Agencies Only</td>
+                        <td style="color:var(--text-3);">Solo freelancers & unverified individuals</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Vetting Standard</strong></td>
+                        <td style="color:var(--teal);">Manual legal & financial verification</td>
+                        <td style="color:var(--text-3);">Automated email verification</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Financial Security</strong></td>
+                        <td style="color:var(--teal);">B2B Escrow up to €500k</td>
+                        <td style="color:var(--text-3);">Basic credit card processing</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Response Time</strong></td>
+                        <td style="color:var(--teal);">Strict 48-hour SLA</td>
+                        <td style="color:var(--text-3);">Variable (days or weeks)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Project Scope</strong></td>
+                        <td style="color:var(--teal);">Complex, multi-disciplinary engagements</td>
+                        <td style="color:var(--text-3);">Small, isolated tasks</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </section>
 
-
-    {{-- ═══════════════════════ CTA BAND ═══════════════════════ --}}
-    <section style="padding:96px 32px;text-align:center
-                   ;border-top:1px solid rgba(255,255,255,0.06);position:relative;overflow:hidden;">
-        <div style="position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 50% 100%,rgba(0,200,150,0.04),transparent);pointer-events:none;"></div>
-        <div class="reveal" style="position:relative;max-width:580px;margin:0 auto;">
-            <div class="label" style="margin-bottom:20px;">Start today</div>
-            <h2 style="font-size:clamp(28px,4vw,44px);margin-bottom:16px;letter-spacing:-0.03em;">Ready to work with the<br>right firms?</h2>
-            <p style="color:#8892A0;font-size:16px;margin-bottom:40px;line-height:1.65;max-width:420px;margin-left:auto;margin-right:auto;">Join 2,400+ verified firms and 14,000+ companies. No setup fee. No subscription.</p>
-            <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
-                <a href="{{ route('register') }}" style="display:inline-flex;align-items:center;gap:8px;background:linear-gradient(180deg,#00D4A0 0%,#00B884 100%);color:#0A0D12;padding:14px 32px;border-radius:10px;font-weight:500;font-size:15px;text-decoration:none;box-shadow:inset 0 1px 0 rgba(255,255,255,0.2),0 4px 12px rgba(0,200,150,0.25);transition:all 150ms ease;">
-                    Get started — it's free
+    {{-- ═══════════════════════ FINAL CTA ═══════════════════════ --}}
+    <section style="padding:140px 32px 160px;text-align:center;position:relative;">
+        <div style="position:relative;max-width:620px;margin:0 auto;z-index:1;">
+            <div class="label reveal" style="margin-bottom:24px;justify-content:center;display:flex;">Initiate Project</div>
+            <h2 class="reveal reveal-delay-1" style="margin-bottom:20px;">Ready to source with<br><span class="gradient-text">absolute certainty?</span></h2>
+            <p class="reveal reveal-delay-2" style="color:var(--text-2);font-size:16px;margin-bottom:48px;line-height:1.7;max-width:440px;margin-left:auto;margin-right:auto;">Join the curated network of decision-makers and top-tier firms. No subscription required.</p>
+            <div class="reveal reveal-delay-3" style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+                <a href="{{ route('services.index') }}" class="btn-primary magnetic" style="padding:16px 36px;font-size:15px;">
+                    Post a Requirement
                 </a>
-                <a href="{{ route('services.index') }}" style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);color:var(--text-2);padding:14px 28px;border-radius:10px;font-size:15px;text-decoration:none;transition:all 150ms ease;">
-                    Browse services
+                <a href="{{ route('register') }}" class="btn-ghost" style="padding:16px 32px;font-size:15px;">
+                    Join as an Expert Firm
                 </a>
             </div>
         </div>
